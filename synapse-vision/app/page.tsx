@@ -462,7 +462,7 @@ export default function Home() {
         </section>
 
         {/* ABOUT */}
-        <section id="about" className="surface-0 relative z-10 py-32 px-6 max-w-7xl mx-auto border-t border-white/[0.04] mb-20 reveal">
+<section id="about" className="surface-0 relative z-10 pt-32 pb-10 px-6 max-w-7xl mx-auto border-t border-white/[0.04] reveal">
           <h2 className="text-center text-4xl font-bold mb-20 tracking-tighter text-white">About This Tool</h2>
           <div className="flex flex-col lg:flex-row gap-16 mb-20">
             <div className="lg:w-1/2">
@@ -508,23 +508,18 @@ export default function Home() {
             className="p-10 rounded-[2.5rem] bg-[#060c1a]/60 border border-white/[0.05] text-center"
           >
             <p className="text-[10px] font-black text-cyan-500/60 uppercase tracking-[0.45em] mb-10">Research & Development Team</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 border-b border-white/[0.05] pb-12">
-              {[
-                { name: 'Shubhayu Giri', id: '2330194' },
-                { name: 'Swastik Dutta', id: '2330199' },
-                { name: 'Soham Santra', id: '2330196' },
-              ].map((member, i) => (
-                <div key={i} className="group">
-                  <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">{member.name}</h4>
-                  <p className="text-xs text-slate-600 font-mono mt-1 tracking-widest">ID: {member.id}</p>
-                </div>
-              ))}
-            </div>
-            <div>
-              <p className="text-[9px] text-slate-600 uppercase tracking-[0.3em] font-bold mb-2">Project Supervisor</p>
-              <h4 className="text-2xl font-bold text-white mb-1">Dr. Vimal Kumar Shrivastava</h4>
-              <p className="text-xs text-cyan-400/60 uppercase tracking-widest">Kalinga Institute of Industrial Technology</p>
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              { name: 'Shubhayu Giri', desc: 'Full-Stack Systems & Integration Engineering' }, 
+              { name: 'Soham Santra', desc: 'Deep Learning Architecture & Model Development' }
+            ].map((member, i) => (
+              <div key={i} className="group">
+                <h4 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">{member.name}</h4>
+                <p className="text-xs text-slate-400 mt-2 font-sans max-w-xs mx-auto leading-relaxed">{member.desc}</p>
+              </div>
+            ))}
+          </div>
+            
           </motion.div>
         </section>
 

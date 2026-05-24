@@ -18,9 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased bg-[#030712] text-white selection:bg-cyan-500/30">
-        {children}
-      </body>
+    <body 
+  className="antialiased bg-[#030712] text-white selection:bg-cyan-500/30" 
+  suppressHydrationWarning
+>
+  {children}
+</body> 
     </html>
   );
 }
