@@ -85,7 +85,7 @@ export default function Home() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:8000/predict", {
+      const response = await fetch("https://shubhayu5-synapse-api.hf.space/predict", {
         method: "POST",
         body: formData,
         cache: "no-store",

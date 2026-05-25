@@ -14,7 +14,12 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://synapse-medical-ai.vercel.app",  # Your live internet website
+        "http://localhost:3000",                  # Your local Next.js terminal
+        "http://127.0.0.1:3000"                   # Fallback local IP
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -113,7 +118,6 @@ async def predict(file: UploadFile = File(...)):
             "coords": [coord_x, coord_y, coord_z], 
             "volume": f"{estimated_volume}cc",
             "confidence": 0.94,
-            # WE NOW RETURN A DICTIONARY OF ALL IMAGES
             "visualizations": {
                 "input": f"data:image/jpeg;base64,{b64_input}",
                 "mask": f"data:image/jpeg;base64,{b64_mask}",
