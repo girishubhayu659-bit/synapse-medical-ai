@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import HolographicCard from './HolographicCard';
 
 function easeOutExpo(t: number): number {
   return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 }
 
-export function useCounter(target: number, duration = 1600, startOnMount = false) {
+export function useCounter(target: number, duration = 1800, startOnMount = false) {
   const [value, setValue] = useState(0);
   const [started, setStarted] = useState(startOnMount);
 
@@ -41,7 +42,7 @@ interface StatCardProps {
 
 export default function AnimatedStatCard({ value, suffix = '', prefix = '', decimals = 0, label }: StatCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const { value: current, start } = useCounter(value, 1800);
+  const { value: current, start } = useCounter(value, 2000);
   const [triggered, setTriggered] = useState(false);
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export default function AnimatedStatCard({ value, suffix = '', prefix = '', deci
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
     observer.observe(ref.current);
     return () => observer.disconnect();
@@ -63,14 +64,17 @@ export default function AnimatedStatCard({ value, suffix = '', prefix = '', deci
   const display = decimals > 0 ? current.toFixed(decimals) : Math.round(current).toString();
 
   return (
-    <div
-      ref={ref}
-      className="bg-[#0a1225]/60 border border-white/[0.05] rounded-2xl p-8 flex flex-col items-center justify-center hover:border-cyan-500/20 transition-colors group"
-    >
-      <div className="text-4xl font-bold text-cyan-400 mb-2 tabular-nums group-hover:text-cyan-300 transition-colors">
-        {prefix}{display}{suffix}
-      </div>
-      <div className="text-[10px] text-slate-500 uppercase tracking-widest text-center">{label}</div>
+    <div ref={ref}>
+      <HolographicCard className="bg-[#0a1225]/80 border border-white/[0.08] rounded-2xl p-8 flex flex-col items-center justify-center hover:border-cyan-400/40 transition-colors shadow-2xl backdrop-blur-xl">
+        <div className="text-4xl md:text-5xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-200 to-indigo-300 mb-2 tabular-nums drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+          {prefix}{display}{suffix}
+        </div>
+        <div className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.3em] text-center">
+          {label}
+        </div>
+        {/* Hologram bottom border indicator */}
+        <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-4 opacity-50 group-hover:w-24 transition-all duration-300" />
+      </HolographicCard>
     </div>
   );
 }
